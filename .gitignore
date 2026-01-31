@@ -1,0 +1,13 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Generated audio output
+audio/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
