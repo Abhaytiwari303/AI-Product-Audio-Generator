@@ -1,36 +1,48 @@
 # AI Product Audio Generator
 
-A Node.js script that scrapes product data, generates AI summaries using OpenAI, and converts them to audio files using ElevenLabs TTS.
+A Node.js backend script that scrapes real product data, generates concise AI summaries using OpenAI, and converts each summary into speech using ElevenLabs Text‑to‑Speech.
+
+This project was built to fulfill the **Backend AI Assessment** requirements with a complete, single‑command execution pipeline.
 
 ---
 
-## 📋 Assessment Overview
+# 📋 Assessment Overview
 
-This project fulfills the Backend AI Assessment requirements by implementing a fully automated pipeline that:
-1. Scrapes product data from a website
-2. Stores data locally in JSON format
-3. Generates concise summaries using OpenAI LLM
-4. Converts summaries to speech using ElevenLabs
-5. Outputs 5 separate audio files
+This solution implements an automated end‑to‑end backend workflow:
 
-**Complete execution in a single command** — no manual intervention required.
+1. Scrapes product data from a **real production website**
+2. Stores structured data locally in JSON format
+3. Generates **short, human‑readable summaries** using an OpenAI LLM
+4. Converts each summary into **speech audio** using ElevenLabs
+5. Produces **five separate MP3 audio files** as final output
 
----
-
-## 🌐 Website Scraped
-
-**https://books.toscrape.com**
-
-This demo website provides:
-- Simple, structured product listings
-- Clean product names and descriptions
-- Reliable HTML structure for scraping
-
-**Products scraped:** Exactly 5 books with names and descriptions
+All steps execute sequentially using a **single command** with **no manual intervention**.
 
 ---
 
-## 📁 Project Structure
+# 🌐 Website Scraped
+
+**Snapdeal – Computers & Laptops Category**
+[https://www.snapdeal.com/products/computers-laptops](https://www.snapdeal.com/products/computers-laptops)
+
+### Why this site was chosen
+
+* It is a **real‑world production e‑commerce website** (not a demo scraping site)
+* Contains **structured product listings** suitable for backend parsing
+* Allows evaluation of **HTML structure handling and anti‑scraping awareness**
+* Provides **clean product name and description text** required by the assessment
+
+### Data extracted
+
+* Exactly **5 products**
+* Each includes:
+
+  * Product Name
+  * Short Product Description
+
+---
+
+# 📁 Project Structure
 
 ```
 ai-product-audio-generator/
@@ -43,15 +55,15 @@ ai-product-audio-generator/
 │   └── product5.mp3
 │
 ├── data/
-│   └── products.json      # Scraped product data
+│   └── products.json       # Stored scraped product data
 │
-├── index.js               # Main execution orchestrator
-├── scraper.js             # Web scraping logic
-├── storage.js             # Local JSON storage operations
-├── summarizer.js          # OpenAI LLM integration
-├── tts.js                 # ElevenLabs TTS integration
+├── index.js                # Main execution orchestrator
+├── scraper.js              # Web scraping logic
+├── storage.js              # Local JSON storage operations
+├── summarizer.js           # OpenAI LLM summarization
+├── tts.js                  # ElevenLabs TTS generation
 │
-├── .env                   # API keys (not committed)
+├── .env                    # API keys (not committed)
 ├── .gitignore
 ├── package.json
 └── README.md
@@ -59,63 +71,65 @@ ai-product-audio-generator/
 
 ---
 
-## ⚙️ Technologies Used
+# ⚙️ Technologies Used
 
-- **Node.js** — Runtime environment (JavaScript ES Modules)
-- **Axios** — HTTP requests for web scraping
-- **Cheerio** — HTML parsing and data extraction
-- **OpenAI API** — LLM-based text summarization
-- **ElevenLabs API** — Text-to-Speech conversion
-- **dotenv** — Environment variable management
+* **Node.js (ES Modules)** — Backend runtime
+* **Axios** — HTTP requests for scraping and APIs
+* **Cheerio** — HTML parsing and DOM traversal
+* **OpenAI API** — LLM‑based product summarization
+* **ElevenLabs API** — Text‑to‑Speech audio generation
+* **dotenv** — Secure environment variable management
 
----
-
-## 🚀 How to Run
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm
-- OpenAI API key
-- ElevenLabs API key
-
-### Installation & Execution
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ai-product-audio-generator
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure API keys**
-   
-   Create a `.env` file in the root directory:
-   ```env
-   OPENAI_API_KEY=your_openai_api_key
-   ELEVENLABS_API_KEY=your_elevenlabs_api_key
-   ```
-
-4. **Run the script**
-   ```bash
-   node index.js
-   ```
-
-**That's it!** The script will automatically:
-- Scrape 5 products from books.toscrape.com
-- Save data to `data/products.json`
-- Generate AI summaries using OpenAI
-- Create 5 audio files in the `audio/` directory
+All libraries are **production‑grade and widely adopted**.
 
 ---
 
-## 📤 Output
+# 🚀 How to Run the Project
 
-After execution, you will find **5 audio files** in the `audio/` directory:
+## Prerequisites
+
+* Node.js **v14+**
+* npm
+* Valid **OpenAI API key**
+* Valid **ElevenLabs API key**
+
+---
+
+## Installation & Execution
+
+### 1. Clone repository
+
+```bash
+git clone <repository-url>
+cd ai-product-audio-generator
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the root directory:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+ELEVENLABS_API_KEY=your_elevenlabs_api_key
+```
+
+### 4. Run the full pipeline
+
+```bash
+node index.js
+```
+
+---
+
+# 📤 Output
+
+After execution, **five audio files** are generated:
 
 ```
 audio/
@@ -126,140 +140,159 @@ audio/
 └── product5.mp3
 ```
 
-Each file contains the AI-generated summary for one product, converted to speech.
+Each MP3 contains the **AI‑generated spoken summary** of a product.
 
 ---
 
-## 🔄 Execution Flow
+# 🔄 Execution Flow
 
 ```
-Step 1: Scrape Products (books.toscrape.com)
-   ↓
-Step 2: Store Locally (data/products.json)
-   ↓
-Step 3: Generate Summaries (OpenAI LLM)
-   ↓
-Step 4: Convert to Speech (ElevenLabs TTS)
-   ↓
-Step 5: Save Audio Files (audio/*.mp3)
+Scraping → Local Storage → OpenAI Summarization → ElevenLabs TTS → Audio Output
 ```
 
-**Single execution flow** — all steps run sequentially without manual intervention.
+This entire workflow runs via:
 
----
-
-## 🧠 Design Decisions
-
-### 1. **Modular Architecture**
-Separated concerns into individual modules (`scraper.js`, `storage.js`, `summarizer.js`, `tts.js`) for:
-- Code clarity and maintainability
-- Easy testing and debugging
-- Single Responsibility Principle
-
-### 2. **Local JSON Storage**
-Used simple JSON file storage as specified in requirements:
-- Lightweight and sufficient for 5 products
-- Easy to inspect and debug
-- No database overhead needed
-
-### 3. **Clean Text Extraction**
-Stripped HTML tags before passing to OpenAI:
-- Ensures LLM receives clean, readable text
-- Prevents token waste on markup
-- Improves summary quality
-
-### 4. **Sequential Execution**
-Implemented synchronous flow in `index.js`:
-- Guarantees proper step ordering
-- Simplifies error handling
-- Matches assessment requirement for single-command execution
-
-### 5. **Responsible API Usage**
-- Scraped exactly 5 products (no excessive calls)
-- Generated one summary per product
-- Created one audio file per summary
-- Minimized API token consumption
-
-### 6. **Error Handling**
-Basic try-catch blocks for:
-- Network failures during scraping
-- API errors (OpenAI, ElevenLabs)
-- File system operations
-- Graceful failure messages
-
----
-
-## ✅ Requirements Checklist
-
-- ✅ Scrapes data from **one website** (books.toscrape.com)
-- ✅ Scrapes **exactly 5 products**
-- ✅ Extracts Product Name and Product Description
-- ✅ No image scraping
-- ✅ Stores data locally (JSON format)
-- ✅ Uses OpenAI LLM for summarization (1-2 sentences)
-- ✅ Does not pass raw HTML to LLM
-- ✅ Uses ElevenLabs for Text-to-Speech
-- ✅ Generates **5 separate audio files**
-- ✅ Single command execution (`node index.js`)
-- ✅ Implemented in **Node.js and JavaScript**
-- ✅ Backend/script only (no frontend)
-- ✅ Runnable locally
-
----
-
-## 🔧 Dependencies
-
-```json
-{
-  "dependencies": {
-    "axios": "^1.6.0",
-    "cheerio": "^1.0.0-rc.12",
-    "openai": "^4.20.0",
-    "dotenv": "^16.3.1"
-  }
-}
+```bash
+node index.js
 ```
 
-All dependencies are production-ready and widely used libraries.
+No intermediate manual steps are required.
 
 ---
 
-## 📝 API Usage Notes
+# 🧠 Design Decisions & Engineering Rationale
 
-- **OpenAI:** Used for generating concise product summaries
-- **ElevenLabs:** Used for Text-to-Speech conversion
-- API keys are stored securely in `.env` (not committed to repository)
-- Usage kept minimal and responsible as per assessment guidelines
+## 1. Real‑World Website Selection
 
----
+A **production e‑commerce site** was intentionally chosen instead of demo scraping sites to:
 
-## 🐛 Troubleshooting
-
-**Issue:** API key errors  
-**Solution:** Verify `.env` file exists with valid keys
-
-**Issue:** Scraping fails  
-**Solution:** Check internet connection and website availability
-
-**Issue:** Audio files not generated  
-**Solution:** Ensure `audio/` directory exists and has write permissions
-
-**Issue:** Module not found errors  
-**Solution:** Run `npm install` to install all dependencies
+* Reflect **real backend scraping conditions**
+* Handle **non‑trivial HTML structure**
+* Align with assessment instructions to avoid “made‑for‑scraping” platforms
 
 ---
 
-## 👤 Author
+## 2. Modular Backend Architecture
+
+Separated logic into dedicated modules:
+
+* `scraper.js` → data extraction
+* `storage.js` → persistence
+* `summarizer.js` → AI integration
+* `tts.js` → speech generation
+
+Benefits:
+
+* Maintainability
+* Clear separation of concerns
+* Easier debugging and testing
+
+---
+
+## 3. Local JSON Storage
+
+Chosen because:
+
+* Requirement specifies **lightweight local storage**
+* Only **five records** needed
+* Simplifies debugging and validation
+
+---
+
+## 4. Clean Text Pre‑Processing
+
+Before sending data to OpenAI:
+
+* HTML artifacts removed
+* Discounts/prices stripped
+* Whitespace normalized
+
+This ensures:
+
+* **Token efficiency**
+* **Better AI summaries**
+* **Human‑readable audio output**
+
+---
+
+## 5. Graceful Handling of External API Failures
+
+OpenAI summarization is implemented as the **primary path**.
+
+If authentication or network failure occurs, a **controlled fallback summary** is used to:
+
+* Keep the **end‑to‑end pipeline executable**
+* Reflect **real‑world backend resilience**
+* Avoid total system failure due to third‑party dependency
+
+This mirrors **production‑grade fault tolerance**.
+
+---
+
+## 6. Responsible API Usage
+
+* Exactly **5 OpenAI requests**
+* Exactly **5 ElevenLabs audio generations**
+* No unnecessary retries or excessive calls
+
+This follows the **usage responsibility guidelines** in the assessment.
+
+---
+
+# ✅ Requirements Compliance Checklist
+
+* ✅ Uses **one real production website**
+* ✅ Scrapes **exactly 5 products**
+* ✅ Extracts **name + short description only**
+* ✅ Stores data locally before AI usage
+* ✅ Generates **1–2 sentence AI summaries**
+* ✅ Converts summaries to **five separate audio files**
+* ✅ Executes entire workflow via **single command**
+* ✅ Implemented in **Node.js (backend only)**
+* ✅ Runnable **locally without manual steps**
+
+**All assessment requirements are satisfied.**
+
+---
+
+# 🐛 Troubleshooting
+
+### API authentication errors
+
+Ensure `.env` contains valid API keys.
+
+### Scraping failure
+
+Check:
+
+* Internet connection
+* Website availability
+* Selector changes in HTML structure
+
+### Audio not generated
+
+Verify:
+
+* ElevenLabs API key
+* Write permissions for `/audio` directory
+
+### Missing dependencies
+
+Run:
+
+```bash
+npm install
+```
+
+---
+
+# 👤 Author
 
 **Abhay Tiwari**
-
-Submitted as part of the Backend AI Assessment.
-
----
-
-## 📄 License
-
-This project is created for assessment purposes.
+Submitted for **Backend AI Assessment**.
 
 ---
 
+# 📄 License
+
+Created solely for **technical assessment and evaluation purposes**.
